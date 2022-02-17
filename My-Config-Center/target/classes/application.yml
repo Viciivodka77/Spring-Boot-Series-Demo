@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: my-config-center
+
+
+person:
+  name: '小明'
+  age: 18
