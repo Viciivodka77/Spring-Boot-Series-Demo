@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <!--xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"-->
+    <!--xsi:schemaLocation="http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd"-->
+
+
+    <!-- 1.创建dubbo应用 -->
+    <dubbo:application name="demo-provider"/>
+
+    <!-- 2.注册地址 N/A采用直连方式 zookeeper://${zookeeper.address:127.0.0.1}:2181 -->
+    <dubbo:registry address="N/A" />
+
+    <!-- 3.把impl服务注入spring -->
+    <bean id="helloService" class="com.sou7h.impl.HelloServiceImpl" />
+
+    <!-- 4.暴露到dubbo服务 -->
+    <dubbo:service interface="com.sou7h.api.HelloService" ref="helloService" />
+
+
+
+</beans>

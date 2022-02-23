@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>My-Config-Center</module>
+        <module>dubbo-demo</module>
     </modules>
 
     <properties>
