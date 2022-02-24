@@ -10,10 +10,9 @@
     <dubbo:application name="demo-consumer"/>
 
     <!-- 2.注册中心 -->
-    <dubbo:registry address="N/A"/>
+    <dubbo:registry address="zookeeper://${zookeeper.address:127.0.0.1}:2181"/>
 
     <!-- 3.引用需要使用的service -->
-    <dubbo:reference id="helloService" check="true" interface="com.sou7h.api.HelloService"
-        url="dubbo://127.0.0.1:20880"/>
+    <dubbo:reference id="helloService" check="true" interface="com.sou7h.api.HelloService"/>
 
 </beans>

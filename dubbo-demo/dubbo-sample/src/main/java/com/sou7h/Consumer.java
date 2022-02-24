@@ -15,7 +15,8 @@ public class Consumer {
         context.start();
         //获取bean 这里的属性name与xml中的id相对应
         HelloService helloService = (HelloService) context.getBean("helloService");
-        helloService.sayHello();
+        String result = helloService.sayHello("world");
+        System.out.println(result);
     }
 
 }

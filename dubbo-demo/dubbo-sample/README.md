@@ -30,11 +30,11 @@
 
 接下来我们需要准备，需要被暴露的服务
 
-![image-20220222224616589](https://gitee.com/ven1ce/picGo/raw/master/img/image-20220222224616589.png)
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224225223776.png" alt="image-20220224225223776" style="zoom:67%;" />
 
 创建api包(提供给consumer)和impl包(由provider提供)
 
-![image-20220222224813406](https://gitee.com/ven1ce/picGo/raw/master/img/image-20220222224813406.png)
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224225254604.png" alt="image-20220224225254604" style="zoom:67%;" />
 
 在其中我们实现一个sayHello方法，在控制台输出`hello world`
 
@@ -56,7 +56,7 @@ log4j.appender.stdout.layout.ConversionPattern=[%d{dd/MM/yy hh:mm:ss:sss z}] %t 
 
 在resource文件夹下新建一个`provider.xml`
 
-![image-20220223215511856](https://gitee.com/ven1ce/picGo/raw/master/img/image-20220223215511856.png)
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224225318237.png" alt="image-20220224225318237" style="zoom:67%;" />
 
 首先我们需要在增加dubbo的xml配置
 
@@ -149,7 +149,7 @@ public class Provider {
 
 启动main方法，我们dubbo服务就启动好了，也可以看到暴露的url
 
-![image-20220223225158528](https://gitee.com/ven1ce/picGo/raw/master/img/image-20220223225158528.png)
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224225401921.png" alt="image-20220224225401921" style="zoom:67%;" />
 
 
 
@@ -206,5 +206,67 @@ public class Consumer {
 
 启动main方法后，我们可以在Provider的控制台看到输出
 
-![image-20220223230340483](https://gitee.com/ven1ce/picGo/raw/master/img/image-20220223230340483.png)
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224225426337.png" alt="image-20220224225426337" style="zoom:67%;" />
+
+## Step 4 加入Zookeeper
+
+进入zookeeper官网下载页面https://zookeeper.apache.org/releases.html下载
+
+解压后我们首先需要在conf文件夹下增加zookeeper的配置
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224223147039.png" style="zoom:67%;" />
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224223213671.png" style="zoom:67%;" />
+
+其中`zoo_sample.cfg`是官方给的例子
+
+我们仿照它创建`zoo.cfg`文件
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224223342782.png" alt="image-20220224223342782" style="zoom: 50%;" />
+
+我们简单的配置zookeeper之后进入到根目录的bin目录下
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224223458788.png" alt="image-20220224223458788" style="zoom:67%;" />
+
+在bin目录下我们可以通过`zkServer.sh`启动zookeeper服务，可以通过`zkCli.sh`开启zookeeper客户端连接上zookeeper服务器
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224223818374.png" alt="image-20220224223818374" style="zoom:67%;" />
+
+更多zookeeper相关，可以看看官方文档https://zookeeper.apache.org/doc/r3.7.0/zookeeperStarted.html#sc_ProgrammingToZooKeeper，在dubbo的官方案例中https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-basic可以看到如何通过代码启动zookeeper。
+
+到这里我们已经把zookeeper启动起来了，接下来我们只需要在`provider.xml`以及`consumer.xml`中修改注册的配置中心到zk。
+
+provider.xml的修改
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224224222269.png" alt="image-20220224224222269" style="zoom:67%;" />
+
+consumer.xml的修改有两处，修改注册中心以及引用服务时的url。
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224224311954.png" alt="image-20220224224311954" style="zoom:67%;" />
+
+重新启动Provider后，再次请求Consumer
+
+可以看到成功请求了。
+
+## Step5 Consumer与Provider的传数据与接收数据
+
+向远程提供服务的Provider传数据和平时调用方法一样简单，只需要修改服务接口的方法，增加一个String参数。
+
+获取返回数据也一样，只需要修改服务接口的返回值。
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224230016988.png" alt="image-20220224230016988" style="zoom:67%;" />
+
+无论是对于服务的调用方还是提供方而言，整体的调用都是无感的。
+
+当然我们也可以获得更多信息，比如调用方的ip
+
+我们可以通过`RpcContext`获取调用方或者提供方的信息。
+
+值得一提的是在dubbo3中`getContext`方法被弃用了，而官方文档中却依旧使用该方法，在源码的注释中也没有任何解释，或者其他方案的引用，在github的issues中也看到了吐槽https://github.com/apache/dubbo/issues/8063。
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224232455505.png" alt="image-20220224232455505" style="zoom:67%;" />
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224232739377.png" alt="image-20220224232739377" style="zoom:67%;" />
+
+![image-20220224232813096](https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224232813096.png)
 

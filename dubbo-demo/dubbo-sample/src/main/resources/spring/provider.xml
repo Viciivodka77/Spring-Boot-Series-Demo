@@ -12,8 +12,8 @@
     <!-- 1.创建dubbo应用 -->
     <dubbo:application name="demo-provider"/>
 
-    <!-- 2.注册地址 N/A采用直连方式 zookeeper://${zookeeper.address:127.0.0.1}:2181 -->
-    <dubbo:registry address="N/A" />
+    <!-- 2.注册地址 N/A采用直连方式  -->
+    <dubbo:registry address="zookeeper://${zookeeper.address:127.0.0.1}:2181" />
 
     <!-- 3.把impl服务注入spring -->
     <bean id="helloService" class="com.sou7h.impl.HelloServiceImpl" />

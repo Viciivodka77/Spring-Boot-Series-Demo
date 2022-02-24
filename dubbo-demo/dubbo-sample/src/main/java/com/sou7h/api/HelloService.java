@@ -7,6 +7,6 @@ package com.sou7h.api;
  */
 public interface HelloService {
 
-    void sayHello();
+    String sayHello(String anyStr);
 
 }
