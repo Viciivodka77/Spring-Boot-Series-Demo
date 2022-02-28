@@ -12,6 +12,8 @@
     <!-- 2.注册中心 -->
     <dubbo:registry address="zookeeper://${zookeeper.address:127.0.0.1}:2181"/>
 
+    <dubbo:protocol name="dubbo" port="20881"/>
+
     <!-- 3.引用需要使用的service -->
     <dubbo:reference id="helloService" check="true" interface="com.sou7h.api.HelloService"/>
 

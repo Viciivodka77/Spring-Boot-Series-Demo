@@ -270,3 +270,68 @@ consumer.xml的修改有两处，修改注册中心以及引用服务时的url�
 
 ![image-20220224232813096](https://gitee.com/ven1ce/picGo/raw/master/img/image-20220224232813096.png)
 
+
+
+## Step 6 搭配dubbo-admin控制台
+
+下载github上的dubbo-admin
+
+```bash
+git clone https://github.com/apache/dubbo-admin.git
+```
+
+打开zookeeper
+
+进入`dubbo-admin-server/src/main/resources/application.properties`中查看Zookeeper配置是否正确，并且修改服务端口
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220228215123923.png" alt="image-20220228215123923" style="zoom: 50%;" />
+
+> 这里修改服务端口是因为开启zookeeper会占用8080端口
+>
+> 如果需要修改需要在zoo.cfg中添加admin.serverPort=空闲端口
+
+之后我们把项目编译打包
+
+```bash
+mvn clean package -Dmaven.test.skip=true
+```
+
+启动有两种方式
+
+- `mvn --projects dubbo-admin-server spring-boot:run`
+- `cd dubbo-admin-distribution/target`; `java -jar dubbo-admin-0.1.jar`
+
+之后访问你的设置的dubbo-admin端口，我这里是`localhost:8088`
+
+账号和密码在`application.properties`文件中可以随意修改，默认为root和root
+
+<img src="https://gitee.com/ven1ce/picGo/raw/master/img/image-20220228220437076.png" alt="image-20220228220437076" style="zoom:50%;" />
+
+然后我们需要在原来的服务中新增一个标签`dubbo:protocol`
+
+```xml
+<dubbo:protocol name="dubbo" port="20881"/>
+```
+
+> protocol相关信息https://dubbo.apache.org/zh/docs/references/xml/dubbo-protocol/
+
+port为dubbo协议缺省端口为20880，rmi协议缺省端口为1099，http和hessian协议缺省端口为80；如果**没有**配置port，则自动采用默认端口，如果配置为**-1**，则会分配一个没有被占用的端口。Dubbo 2.4.0+，分配的端口在协议缺省端口的基础上增长，确保端口段可控。
+
+之后启动`Provider`，我们就可以在dubbo-admin上看到注册的服务了。	
+
+![image-20220228221309188](https://gitee.com/ven1ce/picGo/raw/master/img/image-20220228221309188.png)
+
+## Note
+
+需要注意的坑
+
+1. 如果你的电脑上有多环境JDK(我的电脑上安装了JDK8和JDK17)，注意将你的项目JDK版本切换到JDK8
+
+   Idea进入`Project Structure `=>`Project Setting`=>`Project`=>`Project SDK`
+
+2. 开启zookeeper会占用8080端口导致dubbo-admin跑不起来，可以在zoo.cfg中添加admin.serverPort=空闲端口修改zookeeper的端口，也可以修改dubbo-admin服务的端口
+
+3. dubbo-admin会有一个自带的测试服务`org.apache.dubbo.mock.api.MockService`，他占用掉了**20880**端口，在我们自己的服务中可以通过指定协议修改协议端口。
+
+4. 我发现我的消费者在dubbo-admin中显示不出来，而生产者是可以正常显示的，在issues中看到了相同的问题https://github.com/apache/dubbo-admin/issues/162，但是依旧有人反馈看不到。明天再测试一下。
+
