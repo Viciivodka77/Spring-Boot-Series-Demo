@@ -31,5 +31,10 @@
       <option name="name" value="Spring Milestones" />
       <option name="url" value="https://maven.aliyun.com/repository/spring" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="apache.snapshots.https" />
+      <option name="name" value="Apache Development Snapshot Repository" />
+      <option name="url" value="https://repository.apache.org/content/repositories/snapshots" />
+    </remote-repository>
   </component>
 </project>
