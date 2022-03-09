@@ -16,6 +16,8 @@
     <modules>
         <module>My-Config-Center</module>
         <module>dubbo-demo</module>
+        <module>netty</module>
+        <module>netty/netty-basic-demo</module>
     </modules>
 
     <properties>
