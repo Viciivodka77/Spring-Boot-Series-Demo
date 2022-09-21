@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+  function connect() {
+      let socket;
+      if (window.WebSocket) {
+          socket = new WebSocket("ws://localhost:3000/webSocket");
+          socket.onmessage = function(event) {
+              addMsg(event.data);
+          }
+          socket.onopen = function(event) {
+              addMsg("连接开启");
+              let elementById = document.getElementById("userId");
+              socket.send(JSON.stringify(
+                  {
+                      uid: elementById.value
+                  }
+              ));
+          }
+          socket.onclose = function(event) {
+              addMsg("连接关闭");
+          }
+      }else{
+          alert("不支持webSocket");
+      }
+  }
+  function addMsg(msg){
+      let elementById = document.getElementById("responseText");
+      elementById.value = elementById.value + "\n" + msg;
+  }
+
+
+
+</script>
+<body>
+  <input type="text" id="userId" placeholder="userid"/>
+  <button onclick="connect()">连接websocket</button>
+  <form action="http://localhost:8080/push/pushOne" method="post" >
+      <input type="text" id="toUserId" name="toUserId" placeholder="to"/>
+      <input type="text" id="msg" name="msg" placeholder="message">
+      <input type="submit" value="发送"/>
+  </form>
+
+  <form>
+    <textarea id="responseText"></textarea>
+  </form>
+</body>
+</html>

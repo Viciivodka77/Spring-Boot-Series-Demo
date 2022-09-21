@@ -18,6 +18,7 @@
         <module>dubbo-demo</module>
         <module>netty</module>
         <module>netty/netty-basic-demo</module>
+        <module>netty/netty-websocket-demo</module>
     </modules>
 
     <properties>

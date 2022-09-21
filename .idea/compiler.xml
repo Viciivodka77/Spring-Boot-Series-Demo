@@ -7,11 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="My-Config-Center" />
         <module name="dubbo-sample" />
+        <module name="springboot-dubbo-provider" />
+        <module name="My-Config-Center" />
+        <module name="netty-websocket-demo" />
         <module name="springboot-dubbo-consumer" />
         <module name="netty-basic-demo" />
-        <module name="springboot-dubbo-provider" />
         <module name="netty" />
       </profile>
     </annotationProcessing>
@@ -25,6 +26,7 @@
       <module name="dubbo-sample" options="-parameters" />
       <module name="netty" options="-parameters" />
       <module name="netty-basic-demo" options="-parameters" />
+      <module name="netty-websocket-demo" options="-parameters" />
       <module name="springboot-dubbo-consumer" options="-parameters" />
       <module name="springboot-dubbo-provider" options="-parameters" />
       <module name="untitled" options="-parameters" />

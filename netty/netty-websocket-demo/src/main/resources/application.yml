@@ -1,0 +1,4 @@
+websocket:
+  netty:
+    port: 3000
+    path: "/webSocket"
