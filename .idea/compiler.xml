@@ -7,10 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="kafka-send-server" />
         <module name="dubbo-sample" />
         <module name="springboot-dubbo-provider" />
         <module name="My-Config-Center" />
         <module name="netty-websocket-demo" />
+        <module name="kafka-receive-server" />
         <module name="springboot-dubbo-consumer" />
         <module name="netty-basic-demo" />
         <module name="netty" />
@@ -24,6 +26,9 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="My-Config-Center" options="-parameters" />
       <module name="dubbo-sample" options="-parameters" />
+      <module name="kafka-receive-server" options="-parameters" />
+      <module name="kafka-send-server" options="-parameters" />
+      <module name="middle-server" options="-parameters" />
       <module name="netty" options="-parameters" />
       <module name="netty-basic-demo" options="-parameters" />
       <module name="netty-websocket-demo" options="-parameters" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
@@ -21,7 +21,7 @@
     <bean id="helloService" class="com.sou7h.impl.HelloServiceImpl" />
 
     <!-- 4.暴露到dubbo服务 -->
-    <dubbo:service interface="com.sou7h.api.HelloService" ref="helloService" />
+    <dubbo:com.sou7h.kafkareceiveserver.service interface="com.sou7h.api.HelloService" ref="helloService" />
 
 
 

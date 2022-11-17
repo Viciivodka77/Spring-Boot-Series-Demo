@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: my-config-center
+    name: my-com.sou7h.kafkareceiveserver.config-center
 
 
 person:

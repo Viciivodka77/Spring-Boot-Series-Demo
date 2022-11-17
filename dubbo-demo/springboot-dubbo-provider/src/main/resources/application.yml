@@ -3,7 +3,7 @@ spring:
     name: provider
 dubbo:
   scan:
-    base-packages: com.sou7h.springbootdubbo.service
+    base-packages: com.sou7h.springbootdubbo.com.sou7h.kafkareceiveserver.service
   protocol:
     name: dubbo
     port: 12345

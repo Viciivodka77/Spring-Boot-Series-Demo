@@ -67,7 +67,7 @@ xsi:schemaLocation="http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org
 
 创建dubbo的应用大致有4步
 
-1. 创建dubbo service
+1. 创建dubbo com.sou7h.kafkareceiveserver.service
 
    在xml中添加`<dubbo:application name="demo-provider"/>`
 
@@ -89,7 +89,7 @@ xsi:schemaLocation="http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org
 
 4. 暴露接口
 
-   在xml中添加`<dubbo:service interface="com.sou7h.api.HelloService" ref="helloService" />`
+   在xml中添加`<dubbo:com.sou7h.kafkareceiveserver.service interface="com.sou7h.api.HelloService" ref="helloService" />`
 
    暴露提供的接口HelloService,其中的ref为接口的实现类，此处的ref与上一步中的id相对应
 
@@ -113,7 +113,7 @@ xsi:schemaLocation="http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org
     <bean id="helloService" class="com.sou7h.impl.HelloServiceImpl" />
 
     <!-- 4.暴露到dubbo服务 -->
-    <dubbo:service interface="com.sou7h.api.HelloService" ref="helloService" />
+    <dubbo:com.sou7h.kafkareceiveserver.service interface="com.sou7h.api.HelloService" ref="helloService" />
 
 </beans>
 ```
@@ -137,7 +137,7 @@ public class Provider {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring/provider.xml");
         //2.开启服务
         context.start();
-        System.out.println("dubbo service started");
+        System.out.println("dubbo com.sou7h.kafkareceiveserver.service started");
         //3.堵塞主线程
         System.in.read();
     }
@@ -180,7 +180,7 @@ public class Provider {
 </beans>
 ```
 
-完成前两步后，这里有个新的配置`dubbo:reference`它是消费者需要被引用的服务，与生产者的`dubbo:service`互相对应。
+完成前两步后，这里有个新的配置`dubbo:reference`它是消费者需要被引用的服务，与生产者的`dubbo:com.sou7h.kafkareceiveserver.service`互相对应。
 
 在`Consumer`中我们就可以通过`getBean()`方法获取`helloService`
 

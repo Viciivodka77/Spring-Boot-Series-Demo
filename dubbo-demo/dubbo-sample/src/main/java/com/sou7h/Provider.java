@@ -17,7 +17,7 @@ public class Provider {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring/provider.xml");
         //2.开启服务
         context.start();
-        System.out.println("dubbo service started");
+        System.out.println("dubbo com.sou7h.kafkareceiveserver.service started");
         //3.堵塞主线程
         System.in.read();
     }
