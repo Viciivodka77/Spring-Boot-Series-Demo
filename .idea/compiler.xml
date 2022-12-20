@@ -15,6 +15,7 @@
         <module name="kafka-receive-server" />
         <module name="springboot-dubbo-consumer" />
         <module name="netty-basic-demo" />
+        <module name="redis-stream" />
         <module name="netty" />
       </profile>
     </annotationProcessing>
@@ -32,6 +33,7 @@
       <module name="netty" options="-parameters" />
       <module name="netty-basic-demo" options="-parameters" />
       <module name="netty-websocket-demo" options="-parameters" />
+      <module name="redis-stream" options="-parameters" />
       <module name="springboot-dubbo-consumer" options="-parameters" />
       <module name="springboot-dubbo-provider" options="-parameters" />
       <module name="untitled" options="-parameters" />
